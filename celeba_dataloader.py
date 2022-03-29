@@ -7,7 +7,7 @@ from einops import rearrange
 
 class CelebA256x256:
 
-    def __init__(self,download_path='/home/saifeldein/git_repos/Image_Compression/archive/celeba_hq_256',split_index = -5000,shuffle=False,batch_size=32):
+    def __init__(self,download_path='/home/saifeldein/git_repos/Image_Compression/archive/celeba_hq_256',split_index = -5000,shuffle=False,batch_size=128):
         self.download_path=download_path
         img_paths = glob(self.download_path+'/*.jpg')
         self.train_imgs = img_paths[:split_index]
@@ -24,6 +24,9 @@ class CelebA256x256:
             return self.num_of_train_batches
         else:
             return self.num_of_test_batches
+
+    def get_batch_size(self):
+        return self.batch_size
 
 
     def next_batch(self,train=True):
